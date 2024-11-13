@@ -18,8 +18,9 @@ CREATE TABLE Cliente (
     Cpf_Cliente VARCHAR(14) NOT NULL UNIQUE
 );
 
-INSERT INTO Cliente (Nome_Cliente, Email_Cliente, Senha_Cliente, Cpf_Cliente)
-VALUES ('João Silva', 'joao.silva@example.com', 'senhaSegura123', '123.456.789-00');
+INSERT INTO Cliente ( Nome_Cliente, Email_Cliente, Senha_Cliente, Cpf_Cliente)
+VALUES ( 'João Silva', 'joao.silva@example.com', 'senhaSegura123', '123.456.789-00');
+		
 
 CREATE TABLE Vendedor (
     Id_Vendedor INT PRIMARY KEY AUTO_INCREMENT,
@@ -58,7 +59,28 @@ CREATE TABLE HistoricoDeCompras (
     FOREIGN KEY (Id_Jogo) REFERENCES Jogos(Id_Jogo)
 );
 
-
+INSERT INTO Cliente ( Nome_Cliente, Email_Cliente, Senha_Cliente, Cpf_Cliente)
+VALUES ( 'Marcos Silva', 'marcos.silva@example.com', 'senhaSegura999', '123.956.777-75'),
+		('Silvio Luiz', 'silvio.silva@example.com', 'senhaSegura888', '784.659.444-84');
+        
 SELECT * FROM Cliente;
 
-drop table Pessoa;
+SELECT * FROM Vendedor;
+
+SELECT * FROM Jogos;
+
+
+SELECT * FROM HistoricoDeCompras;
+
+SELECT * FROM CarrinhoDeCompras;
+
+
+SELECT * FROM Cliente WHERE Id_Cliente = 1;
+
+
+drop table CarrinhoDeCompras;
+
+drop table Cliente;
+
+Drop database design;
+
