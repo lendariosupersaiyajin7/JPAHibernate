@@ -8,6 +8,7 @@ public class CarrinhoDeCompras {
     // ATRIBUTOS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id_Carrinho")
     private Long id;
 
     // RELACIONAMENTO COM O CLIENTE (CHAVE ESTRANGEIRA)
