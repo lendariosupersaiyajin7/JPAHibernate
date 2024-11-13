@@ -14,7 +14,7 @@ public class JogosCRUD {
         em.getTransaction().begin();
 
         // CREATE
-        Vendedor vendedor = new Vendedor("Ana Oliveira", "ana@gmail.com", "senha123", "987654321");
+        Vendedor vendedor = new Vendedor("Ana Souza", "souza@gmail.com", "senha245", "964654332");
         em.persist(vendedor);
         Jogos jogo = new Jogos("Jogo de Ação", "Jogo divertido", 79.99, "Ação", vendedor);
         em.persist(jogo);

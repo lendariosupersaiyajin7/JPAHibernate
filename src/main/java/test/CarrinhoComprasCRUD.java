@@ -19,10 +19,13 @@ public class CarrinhoComprasCRUD {
         Cliente cliente = new Cliente("Pedro Lima", "pedro@gmail.com", "123456789", "876543210");
         Vendedor vendedor = new Vendedor("Marcelo Rocha", "marcelo@gmail.com", "senha123", "1122334455");
         Jogos jogo = new Jogos("Jogo de Corrida", "Jogo emocionante", 49.99, "Corrida", vendedor);
+
+        // Persistir primeiro o Cliente, Vendedor e Jogos
         em.persist(cliente);
         em.persist(vendedor);
         em.persist(jogo);
 
+        // Agora o Hibernate pode gerar o ID automaticamente para o CarrinhoDeCompras
         CarrinhoDeCompras carrinho = new CarrinhoDeCompras(cliente, jogo, 1);
         em.persist(carrinho);
 
@@ -35,7 +38,7 @@ public class CarrinhoComprasCRUD {
         em.merge(carrinhoBuscado);
 
         // DELETE
-        em.remove(carrinhoBuscado);
+        //em.remove(carrinhoBuscado);
 
         em.getTransaction().commit();
         em.close();

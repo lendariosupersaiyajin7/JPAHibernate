@@ -1,6 +1,9 @@
 package test;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,7 +23,7 @@ public class HistoricoDeComprasCRUD {
         Jogos jogo = new Jogos("Jogo de Estratégia", "Desafio mental", 99.99, "Estratégia", null);
         em.persist(cliente);
         em.persist(jogo);
-        HistoricoDeCompras historico = new HistoricoDeCompras(cliente, jogo, "2024-11-13", 1);
+        HistoricoDeCompras historico = new HistoricoDeCompras(cliente, jogo, "2024-11-13", 1, jogo.getPreco()); // Passando o preço do jogo
         em.persist(historico);
 
         // READ
@@ -28,7 +31,7 @@ public class HistoricoDeComprasCRUD {
         System.out.println("Histórico encontrado para o cliente: " + historicoBuscado.getCliente().getNome());
 
         // UPDATE
-        historicoBuscado.setDataCompra("2024-11-14");
+        historicoBuscado.setDataCompra(LocalDate.parse("2024-11-14"));
         em.merge(historicoBuscado);
 
         // DELETE
