@@ -8,7 +8,7 @@ public class CarrinhoDeCompras {
     // ATRIBUTOS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     // RELACIONAMENTO COM O CLIENTE (CHAVE ESTRANGEIRA)
     @ManyToOne
@@ -23,6 +23,14 @@ public class CarrinhoDeCompras {
     // ATRIBUTO DE QUANTIDADE DO JOGO NO CARRINHO
     @Column(name = "Quantidade")
     private int quantidade;
+    
+    public CarrinhoDeCompras() {}
+    
+    public CarrinhoDeCompras(Cliente cliente, Jogos jogo, int quantidade) {
+        this.cliente = cliente;
+        this.jogo = jogo;
+        this.quantidade = quantidade;
+    }
 
     // GETTERS E SETTERS
     public long getId() {

@@ -6,9 +6,11 @@ import javax.persistence.*;
 @Table(name = "Jogos")
 public class Jogos {
     // ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id_Jogo")  // Nome da coluna no banco de dados
+	private Long id;
+
 
     @Column(name = "Nome_Jogo")
     private String nome;
@@ -21,6 +23,18 @@ public class Jogos {
 
     @Column(name = "Categoria")
     private String categoria;
+    
+    public Jogos() {
+        // Construtor sem parâmetros
+    }
+    
+    public Jogos(String nome, String descricao, double preco, String categoria, Vendedor vendedor) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.vendedor = vendedor;
+    }
 
     // RELACIONAMENTO COM VENDEDOR (CHAVE ESTRANGEIRA)
     @ManyToOne

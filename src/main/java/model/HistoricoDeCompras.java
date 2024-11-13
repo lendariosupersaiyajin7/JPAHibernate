@@ -9,7 +9,7 @@ public class HistoricoDeCompras {
     // ATRIBUTOS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     // RELACIONAMENTO COM O CLIENTE (CHAVE ESTRANGEIRA)
     @ManyToOne
