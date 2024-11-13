@@ -1,10 +1,14 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Vendedor")
 public class Vendedor {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesignPU");
+    private static EntityManager em = emf.createEntityManager();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Vendedor")
@@ -72,5 +76,21 @@ public class Vendedor {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    
+    // METODOS
+    public static void listavendedores() {
+    	em.getTransaction().begin();
+    	List<Vendedor> vendedores = em.createQuery("SELECT v FROM Vendedor v", Vendedor.class).getResultList();
+    	em.getTransaction().commit();
+    	
+    	if(vendedores.isEmpty()) {
+    		System.out.println("Nenhum vendedor cadastrado");
+    	} else {
+    		System.out.println("LISTA DE CLIENTES CADASTRADOS\n");
+    		for(Vendedor vendedor : vendedores) {
+    			System.out.println("ID: " + vendedor.getIdVendedor() + " | Nome: " + vendedor.getNome() + " | E-mail: " + vendedor.getEmail() + " | CPF: " + vendedor.getCpf());    			
+    		}
+    	}
     }
 }

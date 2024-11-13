@@ -18,7 +18,7 @@ public class Main {
 
         while (true) {
             System.out.println("====- MENU -====");
-            System.out.println("1. Cadastro");
+            System.out.println("1. Lista de Cadastrados");
             System.out.println("2. Catálogo de Jogos");
             System.out.println("3. Carrinho de Compras");
             System.out.println("4. Histórico de Compras");
@@ -35,62 +35,34 @@ public class Main {
             // Menu de Cadastro - Caso a opção 1 seja escolhida
             if (opcao == 1) {
                 System.out.println("Você deseja cadastrar que tipo de conta?");
-                System.out.println("1. Conta de Cliente");
-                System.out.println("2. Conta de Vendedor");
+                System.out.println("1. Clientes\n");
+                System.out.println("2. Vendedores\n");
                 System.out.print("=> INSIRA SEU INPUT: ");
                 int escolha = sc.nextInt();
-                sc.nextLine();  // Limpar o buffer de entrada
+                sc.nextLine(); 
 
                 if (escolha == 1) {
-                    // Cadastro de Cliente
-                    System.out.println("==== Cadastro de Cliente ====");
-                    System.out.print("Digite o nome do cliente: ");
-                    String nome = sc.nextLine();
-                    System.out.print("Digite o e-mail do cliente: ");
-                    String email = sc.nextLine();
-                    System.out.print("Digite a senha do cliente: ");
-                    String senha = sc.nextLine();
-                    System.out.print("Digite o CPF do cliente: ");
-                    String cpf = sc.nextLine();
-
-                    // Criando o cliente
-                    em.getTransaction().begin();
-                    Cliente novoCliente = new Cliente(nome, email, senha, cpf);
-                    em.persist(novoCliente);  // Persiste o cliente no banco
-                    em.getTransaction().commit();
-                    System.out.println("Cliente criado com sucesso!");
+                    Cliente clientela = new Cliente();
+                    clientela.listaClientes();
+                    System.out.println("=====================");
                 } else if (escolha == 2) {
-                    // Cadastro de Vendedor
-                    System.out.println("==== Cadastro de Vendedor ====");
-                    System.out.print("Digite o nome do vendedor: ");
-                    String nomeVendedor = sc.nextLine();
-                    System.out.print("Digite o e-mail do vendedor: ");
-                    String emailVendedor = sc.nextLine();
-                    System.out.print("Digite a senha do vendedor: ");
-                    String senhaVendedor = sc.nextLine();
-                    System.out.print("Digite o CPF do vendedor: ");
-                    String cpfVendedor = sc.nextLine();
-
-                    // Criando o vendedor
-                    em.getTransaction().begin();
-                    Vendedor novoVendedor = new Vendedor(nomeVendedor, emailVendedor, senhaVendedor, cpfVendedor);
-                    em.persist(novoVendedor);  // Persiste o vendedor no banco
-                    em.getTransaction().commit();
-                    System.out.println("Vendedor criado com sucesso!");
+                    Vendedor vendedore = new Vendedor();
+                    vendedore.listavendedores();
+                    System.out.println("=====================");
                 } else {
-                    System.out.println("Opção inválida para cadastro.");
+                    System.out.println("Opção inválida.");
                 }
             }
 
             // Catálogo de Jogos
             else if (opcao == 2) {
-                System.out.println("Catálogo de Jogos");
+                System.out.println("Catálogo de Jogos\n");
                 Jogos jogos = new Jogos();
                 jogos.listaJogos();
                 System.out.println("\nO que deseja fazer?");
                 System.out.println("1. Inserir novo jogo");
                 System.out.println("2. Atualizar preço de jogo existente");
-                System.out.println("3. Deletar jogo existente");
+                System.out.println("3. Deletar jogo existente\n");
                 System.out.print("=> INSIRA SEU INPUT: ");
                 
                 int escolha = sc.nextInt(); 
@@ -106,10 +78,10 @@ public class Main {
 
             // Carrinho de Compras
             else if (opcao == 3) {
-                System.out.println("Carrinho de Compras");
+                System.out.println("Carrinho de Compras\n");
                 System.out.println("1. Adicionar Jogo ao Carrinho");
                 System.out.println("2. Remover Jogo do Carrinho");
-                System.out.print("Escolha uma opção: ");
+                System.out.print("Escolha uma opção: \n");
                 int escolhaCarrinho = sc.nextInt();
                 sc.nextLine();
 

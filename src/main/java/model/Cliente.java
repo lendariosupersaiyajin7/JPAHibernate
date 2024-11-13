@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Cliente") // Nome da tabela no banco de dados
 public class Cliente {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesignPU");
+    private static EntityManager em = emf.createEntityManager();
     // ATRIBUTOS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,5 +83,21 @@ public class Cliente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    
+    //METODOS
+    public static void listaClientes() {
+    	em.getTransaction().begin();
+    	List<Cliente> clientes = em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
+    	em.getTransaction().commit();
+    	
+    	if(clientes.isEmpty()) {
+    		System.out.println("Nenhum cliente cadastrado");
+    	} else {
+    		System.out.println("LISTA DE CLIENTES CADASTRADOS\n");
+    		for(Cliente cliente : clientes) {
+    			System.out.println("ID: " + cliente.getId() + " | Nome: " + cliente.getNome() + " | E-mail: " + cliente.getEmail() + " | CPF: " + cliente.getCpf());    			
+    		}
+    	}
     }
 }
