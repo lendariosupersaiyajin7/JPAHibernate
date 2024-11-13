@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 import model.Cliente;
 
-
+// SAFE
 public class ClienteCRUD {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesignPU");

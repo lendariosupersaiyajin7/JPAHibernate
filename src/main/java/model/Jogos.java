@@ -1,10 +1,15 @@
 package model;
 
+import java.util.List;
+import java.util.Scanner;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Jogos")
 public class Jogos {
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesignPU");
+    private static EntityManager em = emf.createEntityManager();
     // ATRIBUTOS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,4 +94,94 @@ public class Jogos {
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
+    
+    //METODOS
+    public void listaJogos() {
+    	em.getTransaction().begin();
+    	List<Jogos> jogos = em.createQuery("SELECT j FROM Jogos j", Jogos.class).getResultList();
+    	em.getTransaction().commit();
+    	
+    	if(jogos.isEmpty()) {
+    		System.out.println("Nenhum jogo no catálogo\n");
+    	} else {
+    		System.out.println("LISTA DE JOGOS\n");
+    		for(Jogos jogo : jogos) {
+    			System.out.println("ID: " + jogo.getId() + " | Nome: " + jogo.getNome() + " | Preço: " + jogo.getPreco());    			
+    		}
+    	}	
+    }
+    
+    
+    public void inserirJogo(Scanner scanner) {
+	    System.out.print("\nInforme o nome do jogo:\n ");
+	    String nome = scanner.nextLine();  
+	
+	    System.out.print("Informe a descrição do jogo:\n ");
+	    String descricao = scanner.nextLine();  
+	
+	    System.out.print("Informe o preço do jogo:\n ");
+	    double preco = scanner.nextDouble();
+	    scanner.nextLine();  
+	
+	    System.out.print("Informe a categoria do jogo:\n ");
+	    String categoria = scanner.nextLine(); 
+	
+	    Vendedor vendedor = new Vendedor("Vendedor Exemplo", "vendedodasdasr@exemplo.com", "senha123", "17772345678900");
+	    em.getTransaction().begin();
+	    em.persist(vendedor);  // Persistir vendedor no banco
+	    em.getTransaction().commit();
+	
+	    Jogos novoJogo = new Jogos(nome, descricao, preco, categoria, vendedor);
+	    
+	    em.getTransaction().begin();
+	    em.persist(novoJogo);  // Persistir jogo no banco
+	    em.getTransaction().commit();
+	
+	    System.out.println("Jogo inserido com sucesso!");
+	}
+    
+    public static void atualizarPrecoJogo(Scanner scanner) {
+        System.out.print("\nInforme o ID do jogo que deseja atualizar o preço: ");
+        long idJogo = scanner.nextLong();
+        scanner.nextLine();
+
+        Jogos jogoBuscado = em.find(Jogos.class, idJogo);
+
+        if (jogoBuscado != null) {
+            System.out.print("Informe o novo preço para o jogo: ");
+            double novoPreco = scanner.nextDouble();
+            scanner.nextLine();
+
+            jogoBuscado.setPreco(novoPreco);
+
+            em.getTransaction().begin();
+            em.merge(jogoBuscado);
+            em.getTransaction().commit();
+
+            System.out.println("Preço do jogo atualizado com sucesso!");
+        } else {
+            System.out.println("Jogo não encontrado com o ID fornecido.");
+        }
+    }
+    
+    public static void removerJogo(Scanner scanner) {
+        System.out.print("\nInforme o ID do jogo que deseja remover: ");
+        long idJogo = scanner.nextLong();
+        scanner.nextLine();
+
+        Jogos jogoBuscado = em.find(Jogos.class, idJogo);
+
+        if (jogoBuscado != null) {
+            em.getTransaction().begin();
+            em.remove(jogoBuscado);
+            em.getTransaction().commit();
+
+            System.out.println("Jogo removido com sucesso!");
+        } else {
+            System.out.println("Jogo não encontrado com o ID fornecido.");
+        }
+    }
+
+    
+    
 }

@@ -13,7 +13,7 @@ public class Pessoa {
 	// atributos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@Column(name = "Nome_Pessoa")
 	private String nome;

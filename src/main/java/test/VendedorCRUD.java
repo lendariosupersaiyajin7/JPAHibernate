@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 import model.Vendedor;
 
-
+// SAFE
 public class VendedorCRUD {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesignPU");
@@ -47,4 +47,3 @@ public class VendedorCRUD {
         emf.close();
     }
 }
-

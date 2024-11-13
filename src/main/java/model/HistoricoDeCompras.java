@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "HistoricoDeCompras")
@@ -88,9 +89,40 @@ public class HistoricoDeCompras {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+    
+    public LocalDate getDataCompra() {
+    	return dataCompra;
+    }
 
     public void setDataCompra(LocalDate dataCompra) {
         this.dataCompra = dataCompra;
+    }
+    
+    //METODOS
+    public static void listaCompras() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DesignPU");
+        EntityManager em = emf.createEntityManager();
+
+        List<HistoricoDeCompras> historicoList = em.createQuery(
+            "SELECT h FROM HistoricoDeCompras h", 
+            HistoricoDeCompras.class)
+            .getResultList();
+
+        if (historicoList.isEmpty()) {
+            System.out.println("Nenhum histórico de compras encontrado.");
+        } else {
+            System.out.println("Todos os Históricos de Compras:");
+            for (HistoricoDeCompras historico : historicoList) {
+                System.out.println("Data: " + historico.getDataCompra() + 
+                                   ", Cliente: " + historico.getCliente().getNome() + 
+                                   ", Jogo: " + historico.getJogo().getNome() + 
+                                   ", Quantidade: " + historico.getQuantidade() + 
+                                   ", Preço: R$" + historico.getPreco());
+            }
+        }
+
+        em.close();
+        emf.close();
     }
 
 }

@@ -18,7 +18,7 @@ public class PessoaTeste {
 	    entityManager.getTransaction().begin();
 	    
 	    // Operação de leitura ou escrita
-	    Cliente cliente = entityManager.find(Cliente.class, 2L);
+	    Cliente cliente = entityManager.find(Cliente.class, 1L);
 	    
 	    // Verificar se cliente foi encontrado
 	    if (cliente != null) {
@@ -33,4 +33,3 @@ public class PessoaTeste {
 
 
 }
-	
