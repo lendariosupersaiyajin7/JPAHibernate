@@ -49,6 +49,7 @@ CREATE TABLE CarrinhoDeCompras (
     FOREIGN KEY (Id_Jogo) REFERENCES Jogos(Id_Jogo)
 );
 
+
 CREATE TABLE HistoricoDeCompras (
     Id_Historico INT PRIMARY KEY AUTO_INCREMENT,
     Id_Cliente INT,
@@ -63,6 +64,10 @@ INSERT INTO Cliente ( Nome_Cliente, Email_Cliente, Senha_Cliente, Cpf_Cliente)
 VALUES ( 'Marcos Silva', 'marcos.silva@example.com', 'senhaSegura999', '123.956.777-75'),
 		('Silvio Luiz', 'silvio.silva@example.com', 'senhaSegura888', '784.659.444-84');
         
+        
+Insert into CarrinhoDeCompras(Id_Cliente, Id_Jogo, Quantidade)
+values (1, 1, 1);
+
 SELECT * FROM Cliente;
 
 SELECT * FROM Vendedor;
@@ -83,4 +88,13 @@ drop table CarrinhoDeCompras;
 drop table Cliente;
 
 Drop database design;
+
+SHOW CREATE TABLE CarrinhoDeCompras;
+
+SHOW CREATE TABLE HistoricoDeCompras;
+
+ALTER TABLE carrinhodecompras DROP COLUMN id;
+
+ALTER TABLE historicodecompras DROP COLUMN id;
+
 
